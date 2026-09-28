@@ -17,11 +17,14 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
+  timeout: 60 * 1000,
   reporter: [['list'], ['html', { open: 'never' }]],
   use: {
     baseURL: BASE_URLS[ENV] || BASE_URLS.dev,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
+    actionTimeout: 60 * 1000,
+    navigationTimeout: 60 * 1000,
   },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
